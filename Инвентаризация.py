@@ -8,7 +8,9 @@ from loguru import logger
 
 
 def file_name() -> tuple:
-    """нахождение файлов с 6.1 и результата просчета"""
+    """нахождение файлов с 6.1 и результата просчета
+    :return имена файлов"""
+
     file_list = os.listdir()
     file_base = 'Нет подходящих файлов'
     file_check = 'Нет подходящих файлов'
@@ -44,10 +46,11 @@ def read_file(names: tuple):
 
 
 def comparison():
-    """Основная функция"""
+    """Основная функция. Выявление расхождений"""
     result_list = list()
     art_list = list()
     result = list()
+
     try:
         print('Считываю файл склада 6.1...')
         with open('base.csv', newline='', encoding='utf-8-sig') as csvfile:
@@ -125,7 +128,8 @@ def comparison():
         time.sleep(120)
 
 
-def write_exsel(name):
+def write_exsel(name: str):
+    """Запись расхождений в Exsel с форматированием таблицы"""
     try:
         writer = pd.ExcelWriter('{}.xlsx'.format(name), engine='xlsxwriter')
         df = pd.read_csv('{}.csv'.format(name), encoding='utf-8-sig', delimiter=";")
